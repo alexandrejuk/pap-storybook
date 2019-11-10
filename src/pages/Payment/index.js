@@ -1,36 +1,42 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import {
-  addItemToCard,
-  decrementItem,
-  removeItemToCart,
-} from '../../components/actions/cart'
+import { resetCart } from '../../components/actions/cart'
 import PaymentContainer from '../../containers/Payment'
+import { isEmpty } from 'ramda'
+import ServicesRequest from '../../services/request'
 
+const Service = new ServicesRequest()
 const Payment = ({
   addedItems,
+  resetCartItem,
   login,
-  addCartItem,
-  decrementCartItem,
-  removeCartItem,
   history,
 }) => {
-  
+
   useEffect(() => {
     if (!login) {
       return history.push('login')
     }
-  }, [history]) 
+  }, [history])
+
+  const handleChange = (name, value) => {
+    setFormData({...formData, [name]: value })
+  }
+
+  const handleSubmit = () => {
+    if(!isEmpty(formData)) {
+      return Service.addOrder(formData)
+    }
+  }
 
   return (
     <PaymentContainer
-      addCartItem={addCartItem}
-      decrementCartItem={decrementCartItem}
-      removeCartItem={removeCartItem}
       addedItems={addedItems}
       history={history}
       address={login.address}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
     />
   )
 }
@@ -46,9 +52,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps= (dispatch)=>{
   return {
-    addCartItem: id => dispatch(addItemToCard(id)),
-    decrementCartItem: id => dispatch(decrementItem(id)),
-    removeCartItem: id => dispatch(removeItemToCart(id)),
+    resetCartItem: () => dispatch(resetCart()),
   }
 }
 

@@ -11,6 +11,8 @@ const shipping = 30
 const Payment = ({
   address,
   addedItems,
+  handleChange,
+  handleSubmit,
 }) => {
   const itemCart = ({
     id,
@@ -82,35 +84,36 @@ const Payment = ({
               <label className="paymentLabel">
                 Número do Cartão
               </label>
-              <input className="paymentInput" />
+              <input onChange={handleChange} name="cardNumber" className="paymentInput" />
             </div>
             <div className="paymentFormGroup">
               <label className="paymentLabel">
                 Nome do titular (como está gravado no Cartão)
               </label>
-              <input className="paymentInput" />
+              <input onChange={handleChange} name="cardName" className="paymentInput" />
             </div>
             <div className="paymentFormGroup">
               <label className="paymentLabel dateValid">
                 Data de Validade
               </label>
-              <input className="paymentInput dateValidInput" />
-              <input className="paymentInput dateValidInput" />
+              <input onChange={handleChange} name="cardMonth" className="paymentInput dateValidInput" />
+              <input onChange={handleChange} name="cardYear" className="paymentInput dateValidInput" />
             </div>
             <div className="paymentFormGroup">
               <label className="paymentLabel">
                 Código de Segurança
               </label>
-              <input className="paymentInput securityCode" />
+              <input onChange={handleChange} name="cardCVV" className="paymentInput securityCode" />
             </div>
             <div className="paymentFormGroup">
               <label className="paymentLabel">
                 Opções de Parcelamento
               </label>
-              <input className="paymentInput" />
+              <input onChange={handleChange} name="installment" className="paymentInput" />
             </div>
             <div className="paymentAction">
               <Button
+                onClick={handleSubmit}
                 classStyle="btnPrimary"
               >
                 Concluir com cartão de crédito
@@ -125,12 +128,13 @@ const Payment = ({
           <h4>R$ {totalAmount(addedItems) + shipping},00</h4>
           <div>
             <p className="paymentMessage">
-              Você poderá visualizar ou imprimir após a finalização do pedido. 
+              Você poderá visualizar ou imprimir após a finalização do pedido.
               A data de vencimento é de 2 dias corridos após a conclusão do pedido.
               Após esta data, ele perderá a validade.
             </p>
             <div className="paymentAction">
               <Button
+                onClick={handleSubmit}
                 classStyle="btnPrimary"
               >
                 Concluir com boleto bancário

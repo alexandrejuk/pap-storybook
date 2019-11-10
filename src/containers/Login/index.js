@@ -4,13 +4,7 @@ import './style.css'
 const Login = ({
   handleChange,
   handleSubmit,
-  history,
 }) => {
-  const fieldOnChange = (e) => {
-    const name = e.target.name
-    const value = e.target.value
-    handleChange(name, value)
-  }
 
   return (
     <div>
@@ -18,7 +12,7 @@ const Login = ({
     <div className="loginWrapper">
       <div className="formLogin">
         <h3>Sou cadastrado</h3>
-        <form className="loginForm" noValidate>
+        <form className="loginForm">
           <div className="loginFormGroup">
             <label className="loginLabel">
               usuário
@@ -42,7 +36,7 @@ const Login = ({
           </div>
           <div>
             <Button
-              onClick={handleSubmit}
+              onClick={() => handleSubmit('login')}
               classStyle="btnPrimary"
             >
               Logar
@@ -53,7 +47,7 @@ const Login = ({
       <div className="lineRight"/>
       <div className="formLogin">
         <h3>Criar cadastrado</h3>
-        <form className="loginForm" noValidate>
+        <form className="loginForm">
           <div className="loginFormGroup">
             <label className="loginLabel">
               Nome completo
@@ -61,7 +55,7 @@ const Login = ({
             <input
               className="loginInput"
               name="fullName"
-              onChange={fieldOnChange}
+              onChange={handleChange}
             />
           </div>
           <div className="loginFormGroup">
@@ -71,7 +65,7 @@ const Login = ({
             <input
               className="loginInput"
               name="phone"
-              onChange={fieldOnChange}
+              onChange={handleChange}
             />
           </div>
           <h3>Endereço</h3>
@@ -82,7 +76,7 @@ const Login = ({
             <input
               className="loginInput"
               name="zipcode"
-              onChange={fieldOnChange}
+              onChange={handleChange}
             />
           </div>
           <div className="loginFormGroup">
@@ -92,7 +86,7 @@ const Login = ({
             <input
               className="loginInput"
               name="street"
-              onChange={fieldOnChange}
+              onChange={handleChange}
             />
           </div>
           <div className="loginFormGroup">
@@ -102,7 +96,7 @@ const Login = ({
             <input
               className="loginInput"
               name="street_number"
-              onChange={fieldOnChange}
+              onChange={handleChange}
             />
           </div>
           <div className="loginFormGroup">
@@ -118,7 +112,7 @@ const Login = ({
             <input
               className="loginInput"
               name="state"
-              onChange={fieldOnChange}
+              onChange={handleChange}
             />
           </div>
           <h3>Login de acesso</h3>
@@ -126,10 +120,10 @@ const Login = ({
             <label className="loginLabel">
               Usuário
             </label>
-            <input 
+            <input
               className="loginInput"
               name="username"
-              onChange={fieldOnChange}
+              onChange={handleChange}
             />
           </div>
           <div className="loginFormGroup">
@@ -139,11 +133,11 @@ const Login = ({
             <input
               className="loginInput"
               name="password"
-              onChange={fieldOnChange}
+              onChange={handleChange}
             />
           </div>
           <Button
-            onClick={handleSubmit}
+            onClick={() => handleSubmit('add')}
             classStyle="btnPrimary"
           >
             Cadastrar

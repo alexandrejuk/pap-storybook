@@ -4,13 +4,15 @@ import { isEmpty } from 'ramda'
 import { connect } from 'react-redux'
 import LoginContainer from '../../containers/Login'
 import { logged } from '../../components/actions/login'
+import ServicesRequest from '../../services/request'
+
+const Service = new ServicesRequest()
 const Login = ({
   login,
   loggedUser,
   history,
 }) => {
   const [formData, setFormData] = useState({})
-
   useEffect(() => {
     if (login) {
       return history.push('payment')
@@ -24,10 +26,17 @@ const Login = ({
     setFormData({...formData, [name]: value })
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (type) => {
     if(!isEmpty(formData)) {
-      // loggedUser(formData)
-      return
+      if(type === 'login') {
+        return loggedUser(
+          Service.login(formData)
+        )
+      }
+
+      if(type === 'add') {
+        return Service.addCustomer(formData)
+      }
     }
   }
 
